@@ -6,7 +6,8 @@
 - implement session management using cookies with JWT tokens
 - implement Docker file with monitoring for any file changes
 - Generic Error handling using classes and express error handling middleware
-- Ability to throw errors even in async callbacks
+- Ability to throw errors in async callbacks using `express-async-errors` npm package
+- client side cookie management using `cookie-session` npm package
 
 
 
