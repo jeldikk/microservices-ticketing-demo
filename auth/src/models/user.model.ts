@@ -85,7 +85,7 @@ userSchema.methods.validatePassword = async function (password: string) {
 userSchema.pre("save", async function (done) {
   //isModified will return true even when we are trying to create document on first time
   if (this.isModified("password")) {
-    const hashed = Password.toHash(this.get("password"));
+    const hashed = await Password.toHash(this.get("password"));
     this.set("password", hashed);
   }
   done();

@@ -22,8 +22,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cookieSession({
+    name: "jeldikk-session",
     signed: false, // disable encryption on the cookie because we are already encrypting our jwt
     secure: true, // use only on secure http protocol
+    maxAge: 50000,
   })
 );
 
