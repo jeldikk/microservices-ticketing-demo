@@ -19,16 +19,37 @@ interface UserModel extends mongoose.Model<UserAttributes> {
   build(attrs: UserAttributes): UserDocument;
 }
 
-const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  {
+    // toObject: {
+    //   transform(doc, ret) {
+    //     console.log("transform from toObject");
+    //     console.log({ doc, ret });
+    //   },
+    // },
+    //There is also another method toObject
+    toJSON: {
+      // Please refer to the declarations and input types of transform function
+      //
+      transform(doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.password;
+        delete ret.__v;
+      },
+    },
+  }
+);
 
 userSchema.statics.build = (attrs: UserAttributes) => {
   return new User(attrs);
