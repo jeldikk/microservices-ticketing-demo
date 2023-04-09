@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-mongo-pod
+  template:
+    metadata:
+      labels:
+        app: auth-mongo-pod
+    spec:
+      containers:
+      - name: auth-mongo
+        image: mongo
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-mongo-service
+spec:
+  type: ClusterIP
+  selector:
+    app: auth-mongo-pod
+  ports:
+  - name: db
+    protocol: TCP
+    port: 27017
+    targetPort: 27017
