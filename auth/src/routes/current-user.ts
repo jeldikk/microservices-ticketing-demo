@@ -10,30 +10,38 @@ type TokenPayload = {
 const router = express.Router();
 
 router.get("/api/users/currentUser", async (req: Request, res: Response) => {
-  console.log({ jwt: req.session?.token });
+  // console.log({ jwt: req.session?.token });
   //!req.session || !req.session.jwt => !req.session?.jwt
   if (!req.session?.token) {
-    throw new BadRequestError("Invalid Request");
+    return res.status(200).json({
+      currentUser: null,
+    });
   }
 
-  // jwt.verify will validate if the token sent on cookie is tampered or modified
-  const tokenPayload = (await jwt.verify(
-    req.session?.token,
-    process.env.JWT_SECRET!
-  )) as TokenPayload;
+  try {
+    // jwt.verify will validate if the token sent on cookie is tampered or modified
+    const tokenPayload = (await jwt.verify(
+      req.session?.token,
+      process.env.JWT_SECRET!
+    )) as TokenPayload;
 
-  // console.log({
-  //   token: req.session?.token,
-  //   payload: tokenPayload,
-  // });
+    // console.log({
+    //   token: req.session?.token,
+    //   payload: tokenPayload,
+    // });
 
-  res.status(200).json({
-    status: "success",
-    user: {
-      id: tokenPayload.id,
-      email: tokenPayload.email,
-    },
-  });
+    res.status(200).json({
+      status: "success",
+      currentUser: {
+        id: tokenPayload.id,
+        email: tokenPayload.email,
+      },
+    });
+  } catch (err) {
+    res.status(200).json({
+      currentUser: null,
+    });
+  }
 });
 
 export { router as currentUserRouter };
