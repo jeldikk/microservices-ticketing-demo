@@ -10,6 +10,9 @@
 - client side cookie management using `cookie-session` npm package
 - We use `jwt.verify` to verify the token received as session on cookie channel
 
+### Automated Testing using Jest
+- first seperate express app configuration from server settings. making so will segregate app functionality from server.
+
 
 
 
