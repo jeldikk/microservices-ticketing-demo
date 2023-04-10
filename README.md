@@ -8,6 +8,7 @@
 - Generic Error handling using classes and express error handling middleware
 - Ability to throw errors in async callbacks using `express-async-errors` npm package
 - client side cookie management using `cookie-session` npm package
+- We use `jwt.verify` to verify the token received as session on cookie channel
 
 
 
