@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import { BadRequestError } from "../errors/bad-request.error";
 import { validateCurrentUser } from "../middlewares/current-user";
+import { requireAuth } from "../middlewares/reject-invalid-user";
 
 type TokenPayload = {
   id: string;
@@ -13,6 +12,7 @@ const router = express.Router();
 router.get(
   "/api/users/currentUser",
   validateCurrentUser,
+  requireAuth,
   async (req: Request, res: Response) => {
     // console.log({ jwt: req.session?.token });
     //!req.session || !req.session.jwt => !req.session?.jwt
