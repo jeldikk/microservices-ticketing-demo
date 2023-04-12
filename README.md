@@ -12,7 +12,7 @@
 
 ### Automated Testing using Jest
 - first seperate express app configuration from server settings. making so will segregate app functionality from server.
-
+- we will be installing all deps for testing as dev dependencies like jest, supertest, **mongodb-memory-server**. mongodb-memory-server is mainly used to mock mongodb functionality for testing purposes. Since we are having both dev and prod dependencies coming into the picture. so we need to modify on how to create container allowing only prod deps to be considered.
 
 
 
