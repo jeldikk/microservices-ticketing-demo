@@ -12,7 +12,7 @@ const router = express.Router();
 router.post(
   "/api/users/signin",
   [
-    body("email").exists().withMessage("Please provide email"),
+    body("email").notEmpty().withMessage("Please provide email"),
     body("email").isEmail().withMessage("Proper email should be provided"),
     body("password")
       .notEmpty()
@@ -22,7 +22,7 @@ router.post(
   async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const existingUser = await User.findOne({ email });
-    console.log({ existingUser });
+    // console.log({ existingUser });
     if (!existingUser) {
       // Never provide description of errors, try to keep error message less descriptive as much possible
       throw new BadRequestError("Login request failed");
@@ -34,7 +34,7 @@ router.post(
     if (!passwordMatch) {
       throw new BadRequestError("Invalid Credentials");
     }
-    console.log("Generating Token for signin workflow");
+    // console.log("Generating Token for signin workflow");
     // what should happen when password is a match
     //Generate a JWT
     const token = jwt.sign(

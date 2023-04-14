@@ -17,7 +17,7 @@ class RequestValidationError extends CustomError {
         field: e.param,
       };
     });
-    console.log({ formattedErrors });
+    // console.log({ formattedErrors });
     return {
       errors: formattedErrors,
     };

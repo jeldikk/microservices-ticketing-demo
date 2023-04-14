@@ -96,8 +96,8 @@ userSchema.pre("save", async function (done) {
 // });
 
 userSchema.post("save", function (...args) {
-  console.log({ args });
-  console.log("called after saving the document");
+  // console.log({ args });
+  // console.log("called after saving the document");
 });
 
 export const User = mongoose.model<UserDocument, UserModel>("User", userSchema);

@@ -6,7 +6,7 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("calling the error handler");
+  // console.log("calling the error handler");
   if (err instanceof CustomError) {
     return res.status(err.statusCode).json(err.serializeTo());
   }
